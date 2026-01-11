@@ -1,9 +1,11 @@
-package io.github.flapping_bird;
+package Screens;
 
-import com.badlogic.gdx.Game;
+import FBHelper.InputHandler;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import GameWorld.GameRenderer;
+import GameWorld.GameWorld;
 
 /** First screen of the application. Displayed after the application is created. */
 public class GameScreen implements Screen {
@@ -14,8 +16,17 @@ public class GameScreen implements Screen {
     public GameScreen(){
         System.out.println("Game Screen Attached !!");
 
-        world = new GameWorld();
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+
+        float gameWidth = 136f;
+        float gameHeight = (screenHeight/(screenWidth/gameWidth));
+        int midPointY = (int)(gameHeight/2);
+
+        world = new GameWorld(midPointY);
         renderer = new GameRenderer(world);
+
+        Gdx.input.setInputProcessor(new InputHandler(world.getBird()));
     }
 
     @Override

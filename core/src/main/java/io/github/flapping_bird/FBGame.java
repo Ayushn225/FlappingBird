@@ -1,6 +1,7 @@
 package io.github.flapping_bird;
 
 
+import Screens.GameScreen;
 import com.badlogic.gdx.Game;
 
 public class FBGame extends Game {

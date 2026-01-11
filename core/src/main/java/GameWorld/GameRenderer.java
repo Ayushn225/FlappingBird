@@ -1,11 +1,9 @@
-package io.github.flapping_bird;
+package GameWorld;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-
-import java.awt.*;
 
 import static com.badlogic.gdx.Gdx.gl;
 
