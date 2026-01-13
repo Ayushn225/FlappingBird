@@ -41,7 +41,6 @@ public class GameRenderer {
 
     public void render(float runTime){
         System.out.println("GameRenderer- render");
-        Rectangle rect = myWorld.getRect();
 
         //to prevent flickering
         gl.glClearColor(0, 0, 0, 1f);
