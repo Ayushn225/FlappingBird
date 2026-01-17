@@ -1,0 +1,41 @@
+package GameObjects;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class Scrollable {
+    protected Vector2 position;
+    protected Vector2 velocity;
+    protected int width;
+    protected int height;
+    protected boolean isScrolledLeft;
+
+    public Scrollable(float x, float y, int width, int height, float scrollSpeed){
+        position = new Vector2(x, y);
+        velocity = new Vector2(scrollSpeed, 0);
+        this.width = width;
+        this.height = height;
+        isScrolledLeft = false;
+    }
+
+    protected void update(float delta){
+        position.add(velocity.cpy().scl(delta));
+        if(position.x + width <= 0){
+            isScrolledLeft = true;
+        }
+    }
+
+    protected void reset(float newX){
+        isScrolledLeft = false;
+        position.x = newX;
+    }
+
+    public float getTailX(){
+        return position.x + this.width;
+    }
+
+    public float getX() { return position.x;}
+    public float getY() { return position.y;}
+    public float getWidth() { return width; }
+    public float getHeight() { return height; }
+    public boolean getIsScrolledLeft() { return isScrolledLeft; }
+}

@@ -9,8 +9,9 @@ public class FBGame extends Game {
 
     public void create(){
         System.out.println("FBGame created!");
-        setScreen(new GameScreen());
         AssetLoader.load();
+        setScreen(new GameScreen());
+
     }
 
     @Override
