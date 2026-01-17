@@ -19,9 +19,13 @@ public class Scrollable {
 
     protected void update(float delta){
         position.add(velocity.cpy().scl(delta));
-        if(position.x + width <= 0){
+        if(position.x + width <0){
             isScrolledLeft = true;
         }
+    }
+
+    public void stop(){
+        velocity.x = 0;
     }
 
     protected void reset(float newX){
@@ -35,7 +39,7 @@ public class Scrollable {
 
     public float getX() { return position.x;}
     public float getY() { return position.y;}
-    public float getWidth() { return width; }
-    public float getHeight() { return height; }
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
     public boolean getIsScrolledLeft() { return isScrolledLeft; }
 }

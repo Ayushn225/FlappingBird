@@ -1,6 +1,8 @@
 package GameObjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.objects.CircleMapObject;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bird {
@@ -12,6 +14,8 @@ public class Bird {
     private int width;
     private int height;
     private int mid;
+
+    private Circle boundingCircle = new Circle();
 
     public Bird(int x, int y, int width, int height){
         this.width = width;
@@ -50,6 +54,8 @@ public class Bird {
             position.y = mid*2-13;
             velocity.y = -140;
         }
+
+        boundingCircle.set(position.x + 9, position.y + 6, 6.5f);
     }
 
     public boolean isFalling(){
@@ -83,4 +89,6 @@ public class Bird {
     public float getRotation(){
         return rotation;
     }
+
+    public Circle getBoundingCircle(){ return boundingCircle; }
 }
