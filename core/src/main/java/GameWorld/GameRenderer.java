@@ -137,6 +137,11 @@ public class GameRenderer {
             );
         }
 
+        String score = myWorld.getScore() + " ";
+        AssetLoader.shadowFont.draw(batcher, ""+myWorld.getScore(), (136/2)-(3*score.length()), 12);
+
+        AssetLoader.font.draw(batcher, ""+myWorld.getScore(), (136/2)-(3*score.length()-1), 11);
+
         batcher.end();
 
 //        drawDebug();

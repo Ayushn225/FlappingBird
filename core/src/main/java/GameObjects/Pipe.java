@@ -13,6 +13,8 @@ public class Pipe extends Scrollable {
     private static final int SKULL_WIDTH = 24;
     private static final int SKULL_HEIGHT = 14;
 
+    private boolean isScored = false;
+
     public Pipe(float x, float y, int width, int height, float scrollSpeed, float groundY){
         super(x, y, width, height, scrollSpeed);
         this.width = width;
@@ -31,6 +33,7 @@ public class Pipe extends Scrollable {
     public void reset(float newX){
         super.reset(newX);
         height = r.nextInt(90) + 15;
+        isScored = false;
     }
 
     @Override
@@ -54,6 +57,14 @@ public class Pipe extends Scrollable {
             );
         }
         return false;
+    }
+
+    public void setIsScore(boolean score){
+        isScored = score;
+    }
+
+    public boolean isScored(){
+        return isScored;
     }
 
     public Rectangle getBarDown() {

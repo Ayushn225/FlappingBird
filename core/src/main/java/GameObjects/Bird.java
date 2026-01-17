@@ -1,5 +1,6 @@
 package GameObjects;
 
+import FBHelper.AssetLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.math.Circle;
@@ -13,9 +14,10 @@ public class Bird {
     private float rotation;
     private int width;
     private int height;
-    private int mid;
 
     private Circle boundingCircle = new Circle();
+
+    private boolean isAlive = true;
 
     public Bird(int x, int y, int width, int height){
         this.width = width;
@@ -23,7 +25,6 @@ public class Bird {
         this.position = new Vector2(x, y);
         this.velocity = new Vector2(0, 0);
         this.acceleration = new Vector2(0, 460);
-        mid = y + 5;
     }
 
     public void update(float delta){
@@ -38,7 +39,7 @@ public class Bird {
             if(rotation<-20) rotation = -20;
         }
 
-        if(isFalling()){
+        if(isFalling() || !isAlive){
             rotation += 480*delta;
             if(rotation>90) rotation = 90;
         }
@@ -50,13 +51,11 @@ public class Bird {
             velocity.y = 0;
         }
 
-        if(position.y > mid*2-13){
-            position.y = mid*2-13;
-            velocity.y = -140;
-        }
 
         boundingCircle.set(position.x + 9, position.y + 6, 6.5f);
     }
+
+    public boolean getIsAlive(){ return isAlive; }
 
     public boolean isFalling(){
         return velocity.y>110;
@@ -67,7 +66,19 @@ public class Bird {
     }
 
     public void onClick(){
-        velocity.y = -140;
+        if(isAlive){
+            AssetLoader.flap.play();
+            velocity.y = -140;
+        }
+    }
+
+    public void die(){
+        isAlive = false;
+        velocity.y = 0;
+    }
+
+    public void deaccelerate(){
+        acceleration.y = 0;
     }
 
     public float getX(){

@@ -1,5 +1,8 @@
 package GameObjects;
 
+import FBHelper.AssetLoader;
+import GameWorld.GameWorld;
+
 public class ScrollHandler {
     private Grass frontGrass, backGrass;
     private Pipe pipe1, pipe2, pipe3;
@@ -7,7 +10,11 @@ public class ScrollHandler {
     public static final int SCROLL_SPEED = -59;
     public static final int PIPE_GAP = 49;
 
-    public ScrollHandler(float yPos){
+    private GameWorld myWorld;
+
+    public ScrollHandler(float yPos, GameWorld gameWorld){
+        myWorld = gameWorld;
+
         frontGrass = new Grass(0, yPos, 143, 11, SCROLL_SPEED);
         backGrass = new Grass(frontGrass.getTailX(), yPos, 143, 11, SCROLL_SPEED);
 
@@ -50,6 +57,19 @@ public class ScrollHandler {
     }
 
     public boolean collides(Bird bird){
+        if(!pipe1.isScored() && pipe1.getX() + (pipe1.getWidth()/2.0f) < bird.getX() + bird.getWidth()){
+            myWorld.addScore(1);
+            pipe1.setIsScore(true);
+            AssetLoader.coin.play();
+        }else if(!pipe2.isScored() && pipe2.getX() + (pipe2.getWidth()/2.0f) < bird.getX() + bird.getWidth()) {
+            myWorld.addScore(1);
+            pipe2.setIsScore(true);
+            AssetLoader.coin.play();
+        }else if(!pipe3.isScored() && pipe3.getX() + (pipe3.getWidth()/2.0f) < bird.getX() + bird.getWidth()) {
+            myWorld.addScore(1);
+            pipe3.setIsScore(true);
+            AssetLoader.coin.play();
+        }
         return(pipe1.collides(bird) || pipe2.collides(bird) || pipe3.collides(bird));
     }
 
