@@ -137,15 +137,60 @@ public class GameRenderer {
             );
         }
 
-        String score = myWorld.getScore() + " ";
-        AssetLoader.shadowFont.draw(batcher, ""+myWorld.getScore(), (136/2)-(3*score.length()), 12);
+        if (myWorld.isReady()) {
+            // Draw shadow first
+            AssetLoader.shadowFont.draw(batcher, "Touch me", (136 / 2) - (42), 76);
+            // Draw text
+            AssetLoader.font
+                .draw(batcher, "Touch me", (136 / 2) - (42 - 1), 75);
+        } else {
 
-        AssetLoader.font.draw(batcher, ""+myWorld.getScore(), (136/2)-(3*score.length()-1), 11);
+            if (myWorld.isGameOver() || myWorld.isHighScore()) {
+
+                if (myWorld.isGameOver()) {
+                    AssetLoader.shadowFont.draw(batcher, "Game Over", 25, 56);
+                    AssetLoader.font.draw(batcher, "Game Over", 24, 55);
+
+                    AssetLoader.shadowFont.draw(batcher, "High Score:", 23, 106);
+                    AssetLoader.font.draw(batcher, "High Score:", 22, 105);
+
+                    String highScore = AssetLoader.getHighScore() + "";
+
+                    // Draw shadow first
+                    AssetLoader.shadowFont.draw(batcher, highScore, (136 / 2)
+                        - (3 * highScore.length()), 128);
+                    // Draw text
+                    AssetLoader.font.draw(batcher, highScore, (136 / 2)
+                        - (3 * highScore.length() - 1), 127);
+                } else {
+                    AssetLoader.shadowFont.draw(batcher, "High Score!", 19, 56);
+                    AssetLoader.font.draw(batcher, "High Score!", 18, 55);
+                }
+
+                AssetLoader.shadowFont.draw(batcher, "Try again?", 23, 76);
+                AssetLoader.font.draw(batcher, "Try again?", 24, 75);
+
+                // Convert integer into String
+
+
+            }
+        }
+
+        String score = myWorld.getScore() + "";
+
+        // Draw shadow first
+        AssetLoader.shadowFont.draw(batcher, score,
+            (136 / 2) - (3 * score.length()), 12);
+        // Draw text
+        AssetLoader.font.draw(batcher, score,
+            (136 / 2) - (3 * score.length() - 1), 11);
 
         batcher.end();
 
-//        drawDebug();
+//       drawDebug();
+
     }
+
 
     private void drawGrass(){
         batcher.draw(

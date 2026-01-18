@@ -33,6 +33,11 @@ public class Scrollable {
         position.x = newX;
     }
 
+    protected void onRestart(float posX, int scrollSpeed){
+        reset(posX);
+        this.velocity.x = scrollSpeed;
+    }
+
     public float getTailX(){
         return position.x + this.width;
     }

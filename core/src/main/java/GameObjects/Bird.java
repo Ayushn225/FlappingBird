@@ -81,6 +81,16 @@ public class Bird {
         acceleration.y = 0;
     }
 
+    public void onRestart(int y){
+        rotation = 0;
+        velocity.y = 0;
+        velocity.x = 0;
+        position.y = y;
+        acceleration.x = 0;
+        acceleration.y = 460;
+        isAlive = true;
+    }
+
     public float getX(){
         return position.x;
     }

@@ -1,20 +1,32 @@
 package FBHelper;
 
 import GameObjects.Bird;
+import GameWorld.GameWorld;
 import com.badlogic.gdx.InputProcessor;
 
 public class InputHandler implements InputProcessor {
 
     private Bird myBird;
+    GameWorld myWorld;
 
-    public InputHandler(Bird bird){
-        myBird = bird;
+    public InputHandler(GameWorld world){
+        myBird = world.getBird();
+        myWorld = world;
     }
 
     @Override
     public boolean touchDown(int ScreenX, int ScreenY, int pointer, int button){
+        if(myWorld.isReady()){
+            myWorld.start();
+        }
+
         myBird.onClick();
-        return false;
+
+        if(myWorld.isGameOver() || myWorld.isHighScore()){
+            myWorld.restart();
+        }
+
+        return true;
     }
 
     @Override

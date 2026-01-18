@@ -1,6 +1,7 @@
 package FBHelper;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -16,7 +17,14 @@ public class AssetLoader {
     public static Sound dead, flap, coin;
     public static BitmapFont font, shadowFont;
 
+    public static Preferences prefs;
+
     public static void load(){
+        prefs = Gdx.app.getPreferences("FlappingBird");
+        if(!prefs.contains("highScore")){
+            prefs.putInteger("highScore", 0);
+        }
+
         texture = new Texture(Gdx.files.internal("data/texture.png"));
 
         texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
@@ -57,6 +65,15 @@ public class AssetLoader {
 
         shadowFont = new BitmapFont(Gdx.files.internal("data/shadow.fnt"));
         shadowFont.getData().setScale(.25f, -.25f);
+    }
+
+    public static void setHighScore(int val){
+        prefs.putInteger("highScore", val);
+        prefs.flush();
+    }
+
+    public static int getHighScore(){
+        return prefs.getInteger("highScore");
     }
 
     public static void dispose(){
